@@ -31,7 +31,7 @@ class BuildPyCommand(setuptools.command.build_py.build_py):
 
 setup(
     name='pynetcon',
-    version='0.1',
+    version='0.1.2',
     url='https://github.com/TensorCon/PyNetcon',
     license='MIT',
     author='David Anekstein',
@@ -43,5 +43,5 @@ setup(
     install_requires=[
         'oct2py==4.0.6'
     ],
-    package_data={'pynetcon':['netcon/netcon.m', 'netcon/netcon_nondisj_cpp.cpp']},
+    package_data={'pynetcon':['../netcon/netcon.m', '../netcon/netcon_nondisj_cpp.cpp', '../netcon/netcon_nondisj_cpp.mex']},
 )
