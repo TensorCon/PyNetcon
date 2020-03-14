@@ -1,5 +1,7 @@
 import oct2py
 import os
+import subprocess
+import shutil
 
 def netcon(leg_links, verbosity, cost_type, mu_cap, allow_ops, leg_costs):
     """Binding for netcon.m netcon function
@@ -34,8 +36,21 @@ def netcon(leg_links, verbosity, cost_type, mu_cap, allow_ops, leg_costs):
     sequence : list of int
         a sequence of leg links yielding an optimal contraction order
     """
-    octave = oct2py.Oct2Py()
+    
+    # generate .mex file
+    subprocess.run(['mkoctfile', '--mex', '-O3', 'netcon/netcon_nondisj_cpp.cpp'])
+
+    # remove old .mex file if it exists
+    mex_filename = 'netcon_nondisj_cpp.mex'
+    if os.path.exists('netcon/' + mex_filename):
+        os.remove('netcon/' + mex_filename)
+
+    # move new .mex file
+    shutil.move('netcon_nondisj_cpp.mex', 'netcon')
+
+    # run netcon
     netcon_path = os.path.dirname(__file__) + '/../netcon/netcon.m'
+    octave = oct2py.Oct2Py()
     sequence = octave.feval(
                         netcon_path,
                         leg_links,
