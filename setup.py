@@ -43,5 +43,5 @@ setup(
     install_requires=[
         'oct2py==4.0.6'
     ],
-    data_files={'netcon':['netcon/netcon.m', 'netcon/netcon_nondisj_cpp.cpp']},
+    package_data={'pynetcon':['netcon/netcon.m', 'netcon/netcon_nondisj_cpp.cpp']},
 )
