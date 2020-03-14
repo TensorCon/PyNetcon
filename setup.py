@@ -29,8 +29,13 @@ class BuildPyCommand(setuptools.command.build_py.build_py):
     setuptools.command.build_py.build_py.run(self)
 
 
-setup(name='spam',
+setup(
+    name='pynetcon',
     version='0.1',
+    url='https://github.com/TensorCon/PyNetcon',
+    license='MIT',
+    author='David Anekstein',
+    author_email='aneksteind@gmail.com',
     packages=['pynetcon'],
     cmdclass={
         'build_py': BuildPyCommand
