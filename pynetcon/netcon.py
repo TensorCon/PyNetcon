@@ -36,20 +36,22 @@ def netcon(leg_links, verbosity, cost_type, mu_cap, allow_ops, leg_costs):
     sequence : list of int
         a sequence of leg links yielding an optimal contraction order
     """
+
+    netcon_path = os.path.dirname(__file__) + '/../netcon/'
     
     # generate .mex file
     subprocess.run(['mkoctfile', '--mex', '-O3', 'netcon/netcon_nondisj_cpp.cpp'])
 
     # remove old .mex file if it exists
     mex_filename = 'netcon_nondisj_cpp.mex'
-    if os.path.exists('netcon/' + mex_filename):
-        os.remove('netcon/' + mex_filename)
+    if os.path.exists(netcon_path + mex_filename):
+        os.remove(netcon_path + mex_filename)
 
     # move new .mex file
-    shutil.move('netcon_nondisj_cpp.mex', 'netcon')
+    shutil.move('netcon_nondisj_cpp.mex', netcon_path)
 
     # run netcon
-    netcon_path = os.path.dirname(__file__) + '/../netcon/netcon.m'
+    netcon_file_path = netcon_path + 'netcon.m'
     octave = oct2py.Oct2Py()
     sequence = octave.feval(
                         netcon_path,
