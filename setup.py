@@ -10,7 +10,7 @@ import setuptools.command.build_py
 
 setup(
     name='pynetcon',
-    version='0.1.3',
+    version='0.1.4',
     url='https://github.com/TensorCon/PyNetcon',
     license='MIT',
     author='David Anekstein',
